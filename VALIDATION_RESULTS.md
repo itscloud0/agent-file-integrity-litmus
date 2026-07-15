@@ -30,4 +30,4 @@ All four client processes returned zero. The exact-byte oracle caught failures t
 
 The deterministic stale-write oracle passes its rejection baseline and distinguishes `REJECTED`, `MERGED`, and `STALE_OVERWRITE`. Automated live-client timing remains out of scope because neither adapter exposes a stable hook between native read and write calls.
 
-Windows-host client behavior remains `UNKNOWN`.
+Remote package, byte-oracle, and stale-oracle validation passed on Windows for Python 3.10–3.12 in GitHub Actions run `29433201249`. Live Windows-host Codex/opencode behavior remains `UNKNOWN` and is not claimed by v0.1.

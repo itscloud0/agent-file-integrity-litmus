@@ -11,4 +11,4 @@
 
 The system `python3` is Python 3.9 and correctly rejected the package's declared Python `>=3.10` requirement; clean-install verification was repeated successfully with installed Python 3.12.
 
-Remote Ubuntu, macOS, and Windows CI remains pending private publication.
+Remote CI run `29433201249` passed all nine Ubuntu, macOS, and Windows jobs across Python 3.10, 3.11, and 3.12 after correcting the test's POSIX-mode expectation on Windows. Each job installed the package, ran unit tests, compiled the sources, and exercised the installed CLI.

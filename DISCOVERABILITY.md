@@ -1,6 +1,6 @@
 # Discoverability gate
 
-Status before private repository creation: `READY`; final GitHub metadata verification remains pending.
+Status: `PASS` for private publication and release-candidate review.
 
 ## Reviewed artifacts
 
@@ -17,4 +17,6 @@ Description: `Exact byte-preservation tests for coding-agent edits across CRLF, 
 
 Topics: `coding-agents`, `agent-testing`, `file-integrity`, `encoding`, `line-endings`, `crlf`, `developer-tools`, `python`.
 
-The gate becomes `PASS` only after the private repository description/topics match these values and the committed artifacts above are visible on the remote default branch.
+Verified private repository: `https://github.com/itscloud0/agent-file-integrity-litmus`.
+
+The repository description matches the prepared text. Topics are `agent-testing`, `coding-agents`, `crlf`, `developer-tools`, `encoding`, `file-integrity`, `line-endings`, and `python`. The reviewed artifacts are committed on remote `main`; no fabricated adoption or traction claims were found.
