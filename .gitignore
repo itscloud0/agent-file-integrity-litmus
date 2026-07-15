@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+
+# Live adapter captures can contain local paths or provider output. Keep the
+# reviewed summary in Git; keep raw disposable workspaces and captures local.
+validation/adapter-results/*/*/run-*/

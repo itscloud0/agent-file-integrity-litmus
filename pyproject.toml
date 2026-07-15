@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-file-integrity-litmus"
+version = "0.1.0"
+description = "Byte-preservation fixtures for testing coding-agent edits across line endings, encodings, BOMs, and file modes."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Ilia Sorokin" }]
+license = { file = "LICENSE" }
+keywords = [
+  "coding-agent",
+  "agent-testing",
+  "file-integrity",
+  "encoding",
+  "line-endings",
+  "developer-tools",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Testing",
+  "License :: OSI Approved :: MIT License",
+]
+
+[project.scripts]
+agent-file-integrity-litmus = "agent_file_integrity_litmus.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_file_integrity_litmus"]
