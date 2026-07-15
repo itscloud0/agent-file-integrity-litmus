@@ -1,6 +1,6 @@
 # Discoverability gate
 
-Status: `PASS` for private publication and release-candidate review.
+Status: `PASS` for private and public publication.
 
 ## Reviewed artifacts
 
