@@ -1,6 +1,6 @@
 # v0.1.0 release notes
 
-Initial release candidate for exact byte-preservation testing of coding-agent edits.
+Initial release for exact byte-preservation testing of coding-agent edits.
 
 Included:
 
