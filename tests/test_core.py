@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -24,7 +25,8 @@ class FixtureTests(unittest.TestCase):
             create_fixture(root)
             for name, original in FIXTURES.items():
                 self.assertEqual((root / name).read_bytes(), original)
-            self.assertEqual((root / "executable.sh").stat().st_mode & 0o777, 0o755)
+            if os.name != "nt":
+                self.assertEqual((root / "executable.sh").stat().st_mode & 0o777, 0o755)
 
     def test_byte_safe_replacement_passes_all_fixtures(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
