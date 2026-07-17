@@ -1,3 +1,9 @@
+# v0.2.0 release notes
+
+Report classifications now distinguish an unchanged `TARGET` from a changed-but-corrupted fixture while retaining exact expected and actual SHA-256 hashes. Missing fixture files are reported explicitly as `MISSING`.
+
+The JSON, Markdown, and adapter reports expose `PASS`, `SKIPPED`, `CORRUPTED`, or `MISSING` outcomes. The exit status remains failing for skipped, corrupted, or missing edits.
+
 # v0.1.0 release notes
 
 Initial release for exact byte-preservation testing of coding-agent edits.

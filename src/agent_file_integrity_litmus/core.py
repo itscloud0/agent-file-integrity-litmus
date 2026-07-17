@@ -34,6 +34,7 @@ Do not add files or install anything. Finish after the six edits."""
 class Result:
     name: str
     status: str
+    outcome: str
     expected_sha256: str
     actual_sha256: str | None
     expected_mode: str
@@ -140,7 +141,16 @@ def score_fixture(root: Path) -> list[Result]:
         expected_mode = 0o755 if name == "executable.sh" else 0o644
         if not path.is_file():
             results.append(
-                Result(name, "FAIL", expected_hash, None, f"{expected_mode:o}", None, "file is missing")
+                Result(
+                    name=name,
+                    status="FAIL",
+                    outcome="MISSING",
+                    expected_sha256=expected_hash,
+                    actual_sha256=None,
+                    expected_mode=f"{expected_mode:o}",
+                    actual_mode=None,
+                    detail="file is missing",
+                )
             )
             continue
 
@@ -154,10 +164,19 @@ def score_fixture(root: Path) -> list[Result]:
             details.extend(_describe_byte_difference(expected, actual))
         if not mode_ok:
             details.append(f"mode changed from {expected_mode:o} to {actual_mode:o}")
+        status = "PASS" if bytes_ok and mode_ok else "FAIL"
+        if bytes_ok and mode_ok:
+            outcome = "PASS"
+        elif actual == original and mode_ok:
+            outcome = "SKIPPED"
+            details.append("TARGET was unchanged; edit appears to have been skipped")
+        else:
+            outcome = "CORRUPTED"
         results.append(
             Result(
                 name=name,
-                status="PASS" if bytes_ok and mode_ok else "FAIL",
+                status=status,
+                outcome=outcome,
                 expected_sha256=expected_hash,
                 actual_sha256=actual_hash,
                 expected_mode=f"{expected_mode:o}",
@@ -205,10 +224,10 @@ def render_markdown(results: list[Result], root: Path) -> str:
         "",
         f"Fixture root: `{root.resolve()}`",
         "",
-        "| Fixture | Status | Detail |",
-        "| --- | --- | --- |",
+        "| Fixture | Status | Outcome | Detail |",
+        "| --- | --- | --- | --- |",
     ]
-    lines.extend(f"| `{result.name}` | {result.status} | {result.detail} |" for result in results)
+    lines.extend(f"| `{result.name}` | {result.status} | {result.outcome} | {result.detail} |" for result in results)
     passed = sum(result.status == "PASS" for result in results)
     lines.extend(["", f"Result: {passed}/{len(results)} fixtures passed.", ""])
     return "\n".join(lines)

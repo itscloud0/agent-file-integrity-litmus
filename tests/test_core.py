@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import os
 import tempfile
 import unittest
@@ -36,6 +37,16 @@ class FixtureTests(unittest.TestCase):
                 (root / name).write_bytes(expected_bytes(original))
             results = score_fixture(root)
             self.assertEqual([result.status for result in results], ["PASS"] * len(FIXTURES))
+            self.assertEqual([result.outcome for result in results], ["PASS"] * len(FIXTURES))
+
+    def test_unchanged_target_is_classified_as_skipped(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "fixture"
+            create_fixture(root)
+            result = next(result for result in score_fixture(root) if result.name == "crlf.txt")
+            self.assertEqual((result.status, result.outcome), ("FAIL", "SKIPPED"))
+            self.assertIn("TARGET was unchanged", result.detail)
+            self.assertEqual(result.actual_sha256, hashlib.sha256(FIXTURES["crlf.txt"]).hexdigest())
 
     def test_non_utf8_transcoding_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -46,6 +57,7 @@ class FixtureTests(unittest.TestCase):
             (root / "windows-1252.txt").write_bytes("caf�\r\nUPDATED\r\n".encode("utf-8"))
             result = next(result for result in score_fixture(root) if result.name == "windows-1252.txt")
             self.assertEqual(result.status, "FAIL")
+            self.assertEqual(result.outcome, "CORRUPTED")
             self.assertIn("replacement-character", result.detail)
 
     def test_added_final_newline_fails(self) -> None:
@@ -58,6 +70,7 @@ class FixtureTests(unittest.TestCase):
             path.write_bytes(path.read_bytes() + b"\n")
             result = next(result for result in score_fixture(root) if result.name == path.name)
             self.assertEqual(result.status, "FAIL")
+            self.assertEqual(result.outcome, "CORRUPTED")
             self.assertIn("final newline", result.detail)
 
     def test_existing_directory_is_not_overwritten(self) -> None:

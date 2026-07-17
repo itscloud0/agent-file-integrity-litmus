@@ -1,5 +1,15 @@
 # Build results
 
+## 2026-07-17 v0.2.0 release-candidate verification
+
+- Python 3.12 unit suite: 11/11 passed.
+- `compileall` over `src` and `tests`: passed.
+- `uv build`: produced the 0.2.0 wheel and source distribution.
+- Clean Python 3.12 virtual environment: wheel installed with no runtime dependencies.
+- Installed CLI help and fixture listing passed; JSON and Markdown scoring smokes distinguished `SKIPPED`, `PASS`, `CORRUPTED`, and `MISSING` with exact hashes retained.
+- System Python 3.9.6 correctly rejected the package's declared Python `>=3.10` requirement.
+- `git diff --check` and scoped credential-pattern scan: passed.
+
 ## 2026-07-15 release-candidate verification
 
 - Python 3.12 unit suite: 10/10 passed.

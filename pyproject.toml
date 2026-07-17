@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agent-file-integrity-litmus"
-version = "0.1.0"
+version = "0.2.0"
 description = "Byte-preservation fixtures for testing coding-agent edits across line endings, encodings, BOMs, and file modes."
 readme = "README.md"
 requires-python = ">=3.10"

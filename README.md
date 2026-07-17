@@ -14,7 +14,7 @@ Give the printed prompt to the coding agent being tested, with `/tmp/file-integr
 PYTHONPATH=src python -m agent_file_integrity_litmus.cli score /tmp/file-integrity-fixture --format markdown
 ```
 
-The scorer checks exact bytes and POSIX file mode. It does not rely on a model judge.
+The scorer checks exact bytes and POSIX file mode. It does not rely on a model judge. Each result keeps the expected and actual SHA-256 hashes and reports an outcome: `PASS` for an exact edit, `SKIPPED` when `TARGET` is unchanged, `CORRUPTED` when the edit changed bytes or mode incorrectly, or `MISSING` when a fixture file is absent.
 
 To run a supported client in a fresh disposable Git repository, explicitly opt in to live model calls:
 
