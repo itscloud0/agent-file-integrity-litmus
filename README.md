@@ -2,6 +2,27 @@
 
 Agent File Integrity Litmus is a byte-preservation test for coding-agent edits. It helps coding-agent client authors and teams with CRLF, BOM, legacy encodings, Unicode, or executable scripts verify that a tiny agent edit does not corrupt unrelated bytes or file metadata.
 
+## Install
+
+Python 3.10 or newer is required. To install the public `v0.2.0` release without cloning the repository:
+
+```bash
+python3 -m pip install "git+https://github.com/itscloud0/agent-file-integrity-litmus.git@v0.2.0"
+```
+
+For an isolated command-line install with [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv tool install "git+https://github.com/itscloud0/agent-file-integrity-litmus.git@v0.2.0"
+```
+
+For a one-off fixture run without a persistent install:
+
+```bash
+uvx --from "git+https://github.com/itscloud0/agent-file-integrity-litmus.git@v0.2.0" \
+  agent-file-integrity-litmus fixtures
+```
+
 ## Quickstart
 
 ```bash
