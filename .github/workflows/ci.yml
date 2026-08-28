@@ -30,13 +30,13 @@ jobs:
         run: agent-file-integrity-litmus fixtures
 
   public-install:
-    name: Public tag install smoke
+    name: Immutable public release install smoke
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install public release tag
-        run: python -m pip install "git+https://github.com/itscloud0/agent-file-integrity-litmus.git@v0.2.0"
+      - name: Install public release commit
+        run: python -m pip install "git+https://github.com/itscloud0/agent-file-integrity-litmus.git@383d3d85f8353627044b8a9c0452094ad77700a4"
       - name: List public release fixtures
         run: agent-file-integrity-litmus fixtures
