@@ -31,3 +31,18 @@ All four client processes returned zero. The exact-byte oracle caught failures t
 The deterministic stale-write oracle passes its rejection baseline and distinguishes `REJECTED`, `MERGED`, and `STALE_OVERWRITE`. Automated live-client timing remains out of scope because neither adapter exposes a stable hook between native read and write calls.
 
 Remote package, byte-oracle, and stale-oracle validation passed on Windows for Python 3.10–3.12 in GitHub Actions run `29433201249`. Live Windows-host Codex/opencode behavior remains `UNKNOWN` and is not claimed by v0.1.
+
+## 2026-08-29 Codex CLI 0.150.1 benchmark refresh
+
+Selection evidence: the installed Codex CLI advanced from the version in the public benchmark (`0.144.4`) to `0.150.1`. The repository's demand ledger records repeated public reports of coding-agent encoding, line-ending, and stale-write damage; refreshing the current client gives maintainers and client authors current reproducible diagnostic evidence.
+
+User outcome: a maintainer testing Codex CLI 0.150.1 on macOS can reproduce the exact byte-level result and distinguish corruption from a safe skipped edit without relying on a model success message or text diff.
+
+Environment and method: macOS; Codex CLI 0.150.1; two fresh disposable Git repositories; the guarded prompt allowed only built-in read/edit/patch tools and prohibited shell, scripts, and binary-editor recovery. Both client processes returned zero.
+
+| Run | Exact score | Observations |
+| --- | --- | --- |
+| Codex run 1 | 2/6 | CRLF became LF; a final newline was added; Windows-1252 and the executable edit were safely left unchanged. |
+| Codex run 2 | 3/6 | CRLF became LF; a final newline was added; Windows-1252 was safely left unchanged; the executable edit passed. |
+
+The deterministic byte oracle therefore confirms current Codex 0.150.1 failures for CRLF and final-newline preservation, safe skips for Windows-1252 in both runs, and variable executable handling. This evidence is bounded to the tested client/version/host and does not claim behavior for other clients, models, or operating systems. No new opencode result, Windows-host result, automatic stale-write race, or product-adoption claim is made. Raw captures remain local and the reviewed summary is committed.
