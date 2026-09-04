@@ -46,3 +46,17 @@ Environment and method: macOS; Codex CLI 0.150.1; two fresh disposable Git repos
 | Codex run 2 | 3/6 | CRLF became LF; a final newline was added; Windows-1252 was safely left unchanged; the executable edit passed. |
 
 The deterministic byte oracle therefore confirms current Codex 0.150.1 failures for CRLF and final-newline preservation, safe skips for Windows-1252 in both runs, and variable executable handling. This evidence is bounded to the tested client/version/host and does not claim behavior for other clients, models, or operating systems. No new opencode result, Windows-host result, automatic stale-write race, or product-adoption claim is made. Raw captures remain local and the reviewed summary is committed.
+
+## 2026-09-04 - Immutable CI Action Pins
+
+Workflow hardening:
+
+- Pinned `actions/checkout` v4 to commit `11d5960a326750d5838078e36cf38b85af677262`.
+- Pinned all three `actions/setup-python` v5 uses to commit `a26af69be951a213d495a4c3e4e4022e16d87065`.
+- Verified both full commit SHAs against the corresponding official tag refs with `git ls-remote` before editing.
+- Added `tests/test_workflow.py`, which fails if the workflow action refs drift from these reviewed 40-hex commit pins.
+
+Verification target:
+
+- The existing Ubuntu/macOS/Windows Python 3.10/3.11/3.12 test matrix and immutable public-release install smoke remain unchanged apart from dependency pin resolution.
+- This hardening changes workflow dependency resolution only; it does not add new client, model, host, benchmark, or adoption evidence.
