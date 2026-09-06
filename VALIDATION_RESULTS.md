@@ -47,6 +47,21 @@ Environment and method: macOS; Codex CLI 0.150.1; two fresh disposable Git repos
 
 The deterministic byte oracle therefore confirms current Codex 0.150.1 failures for CRLF and final-newline preservation, safe skips for Windows-1252 in both runs, and variable executable handling. This evidence is bounded to the tested client/version/host and does not claim behavior for other clients, models, or operating systems. No new opencode result, Windows-host result, automatic stale-write race, or product-adoption claim is made. Raw captures remain local and the reviewed summary is committed.
 
+## 2026-09-06 Codex CLI 0.153.3 benchmark refresh
+
+Selection evidence: the installed Codex CLI advanced from the documented 0.150.1 benchmark to 0.153.3. The repository's demand ledger records repeated public reports of coding-agent encoding, line-ending, and stale-write damage; refreshing the installed client gives maintainers and client authors current, reproducible diagnostic evidence.
+
+User outcome: a maintainer testing the isolated Codex CLI 0.153.3 invocation on macOS can distinguish a client that declines all edits because it lacks a local reader from a client that silently corrupts file bytes.
+
+Environment and method: macOS; Codex CLI 0.153.3; two fresh disposable Git repositories; the guarded prompt allowed only built-in read/edit/patch tools and prohibited shell, scripts, and binary-editor recovery. Both client processes returned zero. The client reported in both runs that only a text patch tool was available and no built-in local file reader was exposed, so all six files remained unchanged.
+
+| Run | Exact score | Observations |
+| --- | --- | --- |
+| Codex run 1 | 0/6 | All six edits were skipped; the byte oracle reports unchanged `TARGET` markers as failures. |
+| Codex run 2 | 0/6 | Same result and explanation as run 1. |
+
+The deterministic byte oracle therefore records a reproducible 0/6 no-edit result for this exact Codex CLI 0.153.3 isolated invocation. This is not a claim about byte corruption and is bounded to the tested client/version/configuration/host; it does not generalize to other versions, models, configurations, or operating systems. No new opencode result, Windows-host result, automatic stale-write race, or product-adoption claim is made. Raw captures remain local under `/private/tmp/agent-file-integrity-codex-20260906-elevated/`.
+
 ## 2026-09-04 - Immutable CI Action Pins
 
 Workflow hardening:

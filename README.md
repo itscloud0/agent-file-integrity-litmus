@@ -74,7 +74,7 @@ PYTHONPATH=src python -m agent_file_integrity_litmus.cli stale-score /tmp/stale-
 
 ## Current status
 
-The deterministic byte-safe baseline passes 6/6. The latest two native-tool-only runs with Codex CLI 0.150.1 scored 2/6 and 3/6: both lost CRLF and added a final newline, both safely skipped the Windows-1252 edit, and executable-script handling varied. The earlier opencode 1.16.2 runs scored 5/6 both times but alternated between safely skipping and corrupting Windows-1252. See `BENCHMARK.md` for the dated matrix and exact boundaries.
+The deterministic byte-safe baseline passes 6/6. The latest two native-tool-only runs with Codex CLI 0.153.3 scored 0/6 and 0/6: the client left every file unchanged because this isolated run exposed only a text patch tool and no built-in local file reader. The earlier Codex CLI 0.150.1 runs scored 2/6 and 3/6, losing CRLF and adding a final newline while safely skipping the Windows-1252 edit. The earlier opencode 1.16.2 runs scored 5/6 both times but alternated between safely skipping and corrupting Windows-1252. See `BENCHMARK.md` for the dated matrix and exact boundaries.
 
 ## Limitations
 

@@ -25,6 +25,17 @@ Environment: macOS; Codex CLI 0.150.1. The same guarded native-tool prompt ran t
 
 This refresh confirms the current tested Codex version still exposes exact byte-preservation failures. It is evidence for Codex CLI 0.150.1 on macOS, not a general claim about other clients, versions, operating systems, or models. The opencode 1.16.2 result remains the two-run result recorded above; no new opencode result is claimed.
 
+## 2026-09-06 Codex CLI refresh
+
+Environment: macOS; Codex CLI 0.153.3; two fresh disposable repositories; the guarded prompt allowed only built-in read/edit/patch tools and prohibited shell, scripts, and binary-editor recovery. Both client processes returned zero.
+
+| Path | Run 1 | Run 2 | Two-run observation |
+| --- | --- | --- | --- |
+| Direct byte replacement | 6/6 | 6/6 | Deterministic oracle baseline. |
+| Codex CLI 0.153.3 native tools | 0/6 | 0/6 | The client left all six files unchanged after reporting that only a text patch tool was available and no built-in local file reader was exposed. |
+
+This result is bounded to the tested Codex CLI 0.153.3 isolated macOS invocation. It does not claim behavior for other clients, versions, models, configurations, or operating systems. The 0/6 score reflects six skipped edits, not byte corruption; the exact oracle still reports them as failures because `TARGET` remained unchanged. Raw captures remain local under `/private/tmp/agent-file-integrity-codex-20260906-elevated/` and are not part of the repository.
+
 ## Workflow improvement
 
 The CLI replaces manual hex dumps, line-ending inspection, mode checks, and cross-run note-taking with one exact report containing hashes, byte offsets, length changes, and recognizable CRLF, EOF, BOM, and replacement-character failure reasons. The benchmark does not claim measured time savings; it demonstrates a reproducible diagnostic that ordinary Git text diffs and client success messages did not provide.
