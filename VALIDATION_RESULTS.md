@@ -1,5 +1,15 @@
 # Validation Results
 
+## 2026-09-08 - Checkout-free public archive install
+
+Selection evidence: the public `v0.2.0` release has no assets, PyPI is unavailable, and the README previously required Git for every install path. The repository's last-known awareness snapshot is 86 clones / 15 unique cloners.
+
+User outcome: a maintainer can install the exact released CLI without Git or a repository checkout, and CI now verifies that path independently of the source checkout.
+
+Implementation: README now documents the immutable GitHub source archive for release commit `383d3d85f8353627044b8a9c0452094ad77700a4`; the no-checkout `public-install` job installs that archive; and `tests/test_workflow.py` prevents the README and workflow from drifting to a different archive or a mutable Git ref.
+
+Verification: local Python 3.14.6 passed 13 tests, compileall, CLI fixture listing, YAML parsing, `git diff --check`, and scoped credential scanning. A clean temporary venv installed the public archive, listed all six fixtures, and reported package version `0.2.0`. Public Actions run `34261635941` passed the archive-install smoke plus all nine Ubuntu/macOS/Windows Python 3.10/3.11/3.12 matrix jobs for commit `74002f901835e55cf719ecc1f0fd845038477ca4`; public `main` resolves to that commit.
+
 ## 2026-07-14 targeted probe
 
 Environment: macOS; Codex CLI 0.144.1; opencode 1.16.2.
