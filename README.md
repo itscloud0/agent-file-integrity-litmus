@@ -4,7 +4,13 @@ Agent File Integrity Litmus is a byte-preservation test for coding-agent edits. 
 
 ## Install
 
-Python 3.10 or newer is required. To install the public `v0.2.0` release without cloning the repository:
+Python 3.10 or newer is required. To install the public `v0.2.0` release without Git or cloning the repository:
+
+```bash
+python3 -m pip install "https://github.com/itscloud0/agent-file-integrity-litmus/archive/383d3d85f8353627044b8a9c0452094ad77700a4.tar.gz"
+```
+
+If Git is available, the same release can also be installed by tag:
 
 ```bash
 python3 -m pip install "git+https://github.com/itscloud0/agent-file-integrity-litmus.git@v0.2.0"
